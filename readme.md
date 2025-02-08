@@ -10,6 +10,10 @@ This project is a document search project that uses a local file vector database
 ## How to use?
 <img src="introduction.gif" alt="LFSS Demo" width="1080">
 
+
+https://github.com/user-attachments/assets/edadf4ca-c333-4852-8439-9b56dca2f677
+
+
 if you can't see the gif, please check the following link.
 [LFSS Demo](https://github.com/jeean0668/LFSS/blob/main/introduction.gif)
 
