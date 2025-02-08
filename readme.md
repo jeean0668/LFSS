@@ -1,7 +1,6 @@
 
 If you want to see the detail of this project, please check the following languages.
 
-- [English](README.en.md)
 - [Korean](README.ko.md)
 
 ## How to use?

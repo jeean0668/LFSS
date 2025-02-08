@@ -1,116 +1,82 @@
-# LFSS (Local File Semantic Search)
+이 프로젝트의 세부 사항을 보려면 다음 언어를 확인하세요.
 
-이 프로젝트는 로컬 파일 벡터 데이터베이스를 사용하여 문서 검색을 수행하는 프로젝트입니다. 이 프로젝트는 사용자가 로컬 파일 시스템에 저장된 문서를 검색하고 유사한 문서를 찾는 데 도움을 줍니다. 철저하게 로컬 환경에서만 구동됩니다.  
-This project is a document search project that uses a local file vector database. It helps users search for documents stored in the local file system and find similar documents. It operates entirely in a local environment.
+- [영어](README.en.md)
+- [한국어](README.ko.md)
 
-## 기능
+## 사용 방법?
+![LFSS 데모](introduction.gif)
 
-- 지원 파일 양식 : [pdf, docx, doc, txt]
-- 기능 2: [기능에 대한 설명]
-- 기능 3: [기능에 대한 설명]
+# LFSS (로컬 파일 의미 검색)
 
-## 설치 방법
+이 프로젝트는 로컬 파일 벡터 데이터베이스를 사용하는 문서 검색 프로젝트입니다. 사용자가 로컬 파일 시스템에 저장된 문서를 검색하고 유사한 문서를 찾을 수 있도록 도와줍니다. **완전히 로컬 환경에서 작동**합니다.
+
+## 대상 사용자
+- **회사에서 일하는 사용자**로 클라우드 서비스를 이용하기 어렵고, 로컬 파일 시스템에 저장된 문서를 검색하고자 하는 사용자
+- 로컬 파일 시스템에서 **유사한 문서를 찾고자 하는 사용자**
+
+## 설치 및 실행
 
 이 프로젝트를 로컬 환경에 설치하려면 다음 단계를 따르세요.
+
+먼저, Ollama를 설치해야 합니다. 설치하려면 [Ollama](https://ollama.com)를 참조하세요. 그리고 Gemma2:2B 모델을 가져오세요.
+
+### 로컬 LLM 모델 설치
+
+1. Gemma2:2B 모델 가져오기
+    ```bash
+    ollama pull gemma2:2b
+    ```
+
+---
+
+둘째, 프로젝트를 설치해야 합니다. 다음 git 명령어를 사용하여 설치할 수 있습니다.
+
+### 프로젝트 설치 및 설정
 
 1. 저장소 클론
 
    ```bash
-   git clone https://github.com/사용자명/프로젝트명.git
+   git clone https://github.com/jeean0668/LFSS.git
+   cd LFSS
    ```
 
-2. 디렉토리로 이동
+2. 종속성 설치
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. 애플리케이션 실행
 
    ```bash
-   cd 프로젝트명
+   streamlit run app.py
    ```
 
-3. 의존성 설치
+## 기능
 
-   ```bash
-   npm install
-   ```
+로컬 파일 시스템에 저장된 문서를 검색하고 유사한 문서를 찾을 수 있습니다. 특히 디렉토리를 선택하면 **디렉토리 내 모든 파일이 검색됩니다.**
 
-   또는
+- 지원 파일 형식: [pdf, docx, txt]
+- 사용 가능한 OS: [Linux, MacOS]
+- LLM: Gemma2:2B
+- 벡터 DB: Faiss
+- Python 버전: 3.12.1
 
-   ```bash
-   yarn install
-   ```
+## 기여
 
-4. 애플리케이션 실행
+이 프로젝트에 기여하거나 질문이 있는 경우 저에게 연락하세요.
 
-   ```bash
-   npm start
-   ```
-
-   또는
-
-   ```bash
-   yarn start
-   ```
-
-## 사용 예시
-
-프로젝트를 실행한 후, [사용 방법이나 예시]를 참고하여 사용하세요.
-
-## 기여 방법
-
-기여를 원하신다면, [기여 방법에 대한 설명]을 참고하세요.
+- 이메일: gijeeankyung@gmail.com
+- 깃허브: https://github.com/jeean0668
 
 ## 라이선스
 
-이 프로젝트는 [라이선스 이름] 라이선스를 따릅니다. 자세한 내용은 `LICENSE` 파일을 참고하세요.
+무료 및 상업적 용도로 사용할 수 있습니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
 
-## 프로젝트 설치 방법
+## 현재 문제점
+- 2025.01.26: **실시간 파일 업데이트 문제**. 1000개 이상의 파일을 업로드하고 빠른 속도를 달성해야 하는 필요성 때문에 FAISS를 사용하기로 결정했습니다. 그러나 실시간 파일 업데이트에 문제가 있습니다.
+- 2025.01.26: **검색 엔진의 정확도 문제**. 여러 파일(100개 이상)을 업로드할 때 검색 엔진의 정확도가 떨어지고 있습니다.
+- 2025.01.26: **벡터 생성 문제**. gemma2:2b 모델의 토큰 제한으로 인해 파일 수가 증가함에 따라 벡터 생성이 좋지 않습니다.
+- 2025.02.07: **한국어 파일 검색 성능 문제**. 한국어 파일 검색 성능이 영어에 비해 낮습니다. 한국어 토큰이 알파벳보다 크기 때문에 벡터 압축 중 데이터 손실이 큰 것으로 추정됩니다.
+- 2025.02.07: **Windows OS 지원 문제**. Windows OS는 지원되지 않습니다. 앞으로 지원할 예정입니다.
+- 2025.02.07: **LLM 응답 문제**. LLM 응답이 좋지 않습니다. 앞으로 개선할 예정입니다.
 
-```bash
-pip install -r requirements.txt
-```
-
-## 프로젝트 실행 방법
-
-```bash
-streamlit run app.py
-```
-
-## 현재까지 문제 
-- 2025.01.26 : 파일 하나만 업로드 가능, 여러개 업로드시 메모리 과열 발생.(14b 모델 사용) => 여러 파일 업로드시 오랜 시간 소요. VectorDB 적절 모델 선정 => weaviate, chroma, faiss 비교분석 (10개 pdf 파일 업로드 시 메모리 사용량 비교)
-
-| DB 이름 | 메모리 사용량 | 속도 | 장점 | 단점 |
-| --- | --- | --- | --- | --- |
-| chroma | 0.86MB | 0.75s | 빠른 개발 | 대용량 데이터 처리 부담 |
-| faiss | 0.86MB | 0.71s | 대용량 적합 | 초기 세팅 어려움 |
-| weaviate | 31.2MB | 1.56s | 파일 실시간 업데이트 용이 | query 속도 느림 |
-
-1000개 이상의 파일 업로드가 필요하고, 빠른 속도를 달성해야 하기 때문에 FAISS 사용 결정. 하지만 실시간 파일 업데이트 부분에서 문제가 있음. 
-
-- 2025.01.26 : 파일 업로드 시 벡터 DB 초기화 및 저장 부분 추가. update_rag.py 파일에 vectorDB 초기화 및 저장 부분을, run.py 파일에 파일 업로드 부분을 추가. 
-
-## How it works?
-
-Before:
-```bash
-/home/user/sample_data/
-├── 2025년_산재보험료율표_다운로드.pdf
-├── [양식] 계좌입금신청서(사업자)양식.pdf
-├── announcement.pdf
-├── test.pdf
-└── 로켓피치_AWS_우수상_아마존악어떼_김지안,홍수정,남혜원,김태수,오재혁,한대명_250123_143423.pdf
-
-Question :
-How to pay for the insurance?
-```
-
-Result:
-```bash 
-You have to visit the website and pay for the insurance. Web site is https://www.rocketpich.com/ you have to prepare your account information.
-
-source :
-1. [/home/user/sample_data/2025년_산재보험료율표_다운로드.pdf](https://www.rocketpich.com/wp-content/uploads/2025년_산재보험료율표_다운로드.pdf)
-
-2. [/home/user/sample_data/계좌입금신청서(사업자)양식.pdf](https://www.rocketpich.com/wp-content/uploads/계좌입금신청서(사업자)양식.pdf)
-```
-
-
-export OPENAI_API_KEY=fake-key
-export OPENAI_BASE_URL=http://localhost:11434/v1
