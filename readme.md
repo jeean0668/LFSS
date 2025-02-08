@@ -10,12 +10,16 @@ This project is a document search project that uses a local file vector database
 
 ## Features
 
-- Supported file formats: [pdf, docx, doc, txt]
-- Available OS : [Windows, Linux, MacOS]
+you can search for documents stored in the local file system and find similar documents. especially if you select a directory, **all of the files in the directory will be uploaded and searched.**
+
+- Supported file formats: [pdf, docx, txt]
+- Available OS : [Linux, MacOS]
 - LLM : Gemma2:2B
-- Vector DB : Faiss 
-<!-- - 기능 2: [기능에 대한 설명] -->
-<!-- - 기능 3: [기능에 대한 설명] -->
+- Vector DB : Faiss
+- Python version : 3.12.1
+- Target Users : 
+    - Users **who work in a company** and want to search for documents stored in the local file system. 
+    - Users **who want to find similar documents** in the local file system.
 
 ## Installation & Execution
 
@@ -55,63 +59,22 @@ Second, you need to install the project. you can install it by using the followi
    streamlit run app.py
    ```
 
-## Usage
-
-After running the project, please refer to [usage] to use it.
-
 ## Contribution
 
 If you want to contribute or have any questions about this project, please contact me.
 
-email : gijeean0668@gmail.com
+- email : gijeeankyung@gmail.com 
+- github : https://github.com/jeean0668
+
 ## License
 
 It can be used for free and commercial use. For more details, please refer to the `LICENSE` file.
 
-## Project Installation
-
-```bash
-pip install -r requirements.txt
-```
-
-## Project Execution
-
-```bash
-streamlit run app.py
-```
-
 ## Current Issues
-- 2025.01.26 : if we upload multiple files(more than 100), the searching engine's accuracy is becoming worse.
+- 2025.01.26: **Real-time file update issues**. Decided to use FAISS due to the need to upload more than 1000 files and achieve fast speed. However, there are issues with real-time file updates.
+- 2025.01.26: **Searching engine's accuracy issues**. When uploading multiple files (more than 100), the searching engine's accuracy is becoming worse.
+- 2025.01.26: **Vector generation issues**. Due to the token limit of the gemma2:2b model, as the number of files increases, it is not good at generating the vector.
+- 2025.02.07: **Korean file search performance issues**. Korean file search performance is lower compared to English. It is estimated that data loss during vector compression is large because Korean tokens are larger than alphabets.
+- 2025.02.07: **Windows OS support issues**. Windows OS is not supported. We will support it in the future.
+- 2025.02.07: **LLM response issues**. The LLM response is not good. We will improve it in the future.
 
-1000개 이상의 파일 업로드가 필요하고, 빠른 속도를 달성해야 하기 때문에 FAISS 사용 결정. 하지만 실시간 파일 업데이트 부분에서 문제가 있음. 
-
-- 2025.01.26 : 파일 업로드 시 벡터 DB 초기화 및 저장 부분 추가. update_rag.py 파일에 vectorDB 초기화 및 저장 부분을, run.py 파일에 파일 업로드 부분을 추가. 
-
-## How it works?
-
-Before:
-```bash
-/home/user/sample_data/
-├── 2025년_산재보험료율표_다운로드.pdf
-├── [양식] 계좌입금신청서(사업자)양식.pdf
-├── announcement.pdf
-├── test.pdf
-└── 로켓피치_AWS_우수상_아마존악어떼_김지안,홍수정,남혜원,김태수,오재혁,한대명_250123_143423.pdf
-
-Question :
-How to pay for the insurance?
-```
-
-Result:
-```bash 
-You have to visit the website and pay for the insurance. Web site is https://www.rocketpich.com/ you have to prepare your account information.
-
-source :
-1. [/home/user/sample_data/2025년_산재보험료율표_다운로드.pdf](https://www.rocketpich.com/wp-content/uploads/2025년_산재보험료율표_다운로드.pdf)
-
-2. [/home/user/sample_data/계좌입금신청서(사업자)양식.pdf](https://www.rocketpich.com/wp-content/uploads/계좌입금신청서(사업자)양식.pdf)
-```
-
-
-export OPENAI_API_KEY=fake-key
-export OPENAI_BASE_URL=http://localhost:11434/v1
