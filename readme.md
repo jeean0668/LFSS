@@ -5,8 +5,7 @@ If you want to see the detail of this project, please check the following langua
 - [Korean](README.ko.md)
 
 ## How to use?
-
-![LFSS Demo](0208.gif)
+![LFSS Demo](introduction.gif)
 
 # LFSS (Local File Semantic Search)
   
