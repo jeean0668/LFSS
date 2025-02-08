@@ -1,66 +1,79 @@
-
-If you want to see the detail of this project, please check the following languages.
-
-- [English](README.en.md)
-- [Korean](README.ko.md)
-
 # LFSS (Local File Semantic Search)
-  
-This project is a document search project that uses a local file vector database. It helps users search for documents stored in the local file system and find similar documents. It operates **entirely in a local environment**.
 
-## Features
+이 프로젝트는 로컬 파일 벡터 데이터베이스를 사용하여 문서 검색을 수행하는 프로젝트입니다. 이 프로젝트는 사용자가 로컬 파일 시스템에 저장된 문서를 검색하고 유사한 문서를 찾는 데 도움을 줍니다. 철저하게 로컬 환경에서만 구동됩니다.  
+This project is a document search project that uses a local file vector database. It helps users search for documents stored in the local file system and find similar documents. It operates entirely in a local environment.
 
-- Supported file formats: [pdf, docx, doc, txt]
-<!-- - 기능 2: [기능에 대한 설명] -->
-<!-- - 기능 3: [기능에 대한 설명] -->
+## 기능
 
-## Installation & Execution
+- 지원 파일 양식 : [pdf, docx, doc, txt]
+- 기능 2: [기능에 대한 설명]
+- 기능 3: [기능에 대한 설명]
 
-To install this project in a local environment, please follow these steps.
+## 설치 방법
 
-1. Clone the repository
+이 프로젝트를 로컬 환경에 설치하려면 다음 단계를 따르세요.
 
-   ```bash
-   git clone https://github.com/jeean0668/LFSS.git
-   cd LFSS
-   ```
-
-2. Install dependencies
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. Run the application
+1. 저장소 클론
 
    ```bash
-   streamlit run app.py
+   git clone https://github.com/사용자명/프로젝트명.git
    ```
 
-## Usage
+2. 디렉토리로 이동
 
-After running the project, please refer to [usage] to use it.
+   ```bash
+   cd 프로젝트명
+   ```
 
-## Contribution
+3. 의존성 설치
+
+   ```bash
+   npm install
+   ```
+
+   또는
+
+   ```bash
+   yarn install
+   ```
+
+4. 애플리케이션 실행
+
+   ```bash
+   npm start
+   ```
+
+   또는
+
+   ```bash
+   yarn start
+   ```
+
+## 사용 예시
+
+프로젝트를 실행한 후, [사용 방법이나 예시]를 참고하여 사용하세요.
+
+## 기여 방법
 
 기여를 원하신다면, [기여 방법에 대한 설명]을 참고하세요.
 
-## License
+## 라이선스
 
-This project is licensed under [license name]. For more details, please refer to the `LICENSE` file.
+이 프로젝트는 [라이선스 이름] 라이선스를 따릅니다. 자세한 내용은 `LICENSE` 파일을 참고하세요.
 
-## Project Installation
+## 프로젝트 설치 방법
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Project Execution
+## 프로젝트 실행 방법
 
 ```bash
 streamlit run app.py
 ```
 
-## Current Issues
+## 현재까지 문제 
 - 2025.01.26 : 파일 하나만 업로드 가능, 여러개 업로드시 메모리 과열 발생.(14b 모델 사용) => 여러 파일 업로드시 오랜 시간 소요. VectorDB 적절 모델 선정 => weaviate, chroma, faiss 비교분석 (10개 pdf 파일 업로드 시 메모리 사용량 비교)
 
 | DB 이름 | 메모리 사용량 | 속도 | 장점 | 단점 |
