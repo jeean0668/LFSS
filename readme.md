@@ -4,22 +4,17 @@ If you want to see the detail of this project, please check the following langua
 - [English](README.en.md)
 - [Korean](README.ko.md)
 
+## How to use?
+
+![LFSS Demo](0208.gif)
+
 # LFSS (Local File Semantic Search)
   
 This project is a document search project that uses a local file vector database. It helps users search for documents stored in the local file system and find similar documents. It operates **entirely in a local environment**.
 
-## Features
-
-you can search for documents stored in the local file system and find similar documents. especially if you select a directory, **all of the files in the directory will be uploaded and searched.**
-
-- Supported file formats: [pdf, docx, txt]
-- Available OS : [Linux, MacOS]
-- LLM : Gemma2:2B
-- Vector DB : Faiss
-- Python version : 3.12.1
-- Target Users : 
-    - Users **who work in a company** and want to search for documents stored in the local file system. 
-    - Users **who want to find similar documents** in the local file system.
+## Target Users 
+ - Users **who work in a company** and want to search for documents stored in the local file system. 
+- Users **who want to find similar documents** in the local file system
 
 ## Installation & Execution
 
@@ -58,6 +53,17 @@ Second, you need to install the project. you can install it by using the followi
    ```bash
    streamlit run app.py
    ```
+
+## Features
+
+
+you can search for documents stored in the local file system and find similar documents. especially if you select a directory, **all of the files in the directory will be uploaded and searched.**
+
+- Supported file formats: [pdf, docx, txt]
+- Available OS : [Linux, MacOS]
+- LLM : Gemma2:2B
+- Vector DB : Faiss
+- Python version : 3.12.1
 
 ## Contribution
 
