@@ -11,12 +11,31 @@ This project is a document search project that uses a local file vector database
 ## Features
 
 - Supported file formats: [pdf, docx, doc, txt]
+- Available OS : [Windows, Linux, MacOS]
+- LLM : Gemma2:2B
+- Vector DB : Faiss 
 <!-- - 기능 2: [기능에 대한 설명] -->
 <!-- - 기능 3: [기능에 대한 설명] -->
 
 ## Installation & Execution
 
 To install this project in a local environment, please follow these steps.
+
+First, you need to install Ollama. please refer to [Ollama](https://ollama.com) to install it. and pull the Gemma2:2B model.
+
+
+### Install Local LLM Model
+
+1. Pull Gemma2:2B model
+    ```bash
+    ollama pull gemma2:2b
+    ```
+
+---
+
+Second, you need to install the project. you can install it by using the following git command.
+
+### Install project & Setup the project
 
 1. Clone the repository
 
@@ -42,11 +61,12 @@ After running the project, please refer to [usage] to use it.
 
 ## Contribution
 
-기여를 원하신다면, [기여 방법에 대한 설명]을 참고하세요.
+If you want to contribute or have any questions about this project, please contact me.
 
+email : gijeean0668@gmail.com
 ## License
 
-This project is licensed under [license name]. For more details, please refer to the `LICENSE` file.
+It can be used for free and commercial use. For more details, please refer to the `LICENSE` file.
 
 ## Project Installation
 
@@ -61,13 +81,7 @@ streamlit run app.py
 ```
 
 ## Current Issues
-- 2025.01.26 : 파일 하나만 업로드 가능, 여러개 업로드시 메모리 과열 발생.(14b 모델 사용) => 여러 파일 업로드시 오랜 시간 소요. VectorDB 적절 모델 선정 => weaviate, chroma, faiss 비교분석 (10개 pdf 파일 업로드 시 메모리 사용량 비교)
-
-| DB 이름 | 메모리 사용량 | 속도 | 장점 | 단점 |
-| --- | --- | --- | --- | --- |
-| chroma | 0.86MB | 0.75s | 빠른 개발 | 대용량 데이터 처리 부담 |
-| faiss | 0.86MB | 0.71s | 대용량 적합 | 초기 세팅 어려움 |
-| weaviate | 31.2MB | 1.56s | 파일 실시간 업데이트 용이 | query 속도 느림 |
+- 2025.01.26 : if we upload multiple files(more than 100), the searching engine's accuracy is becoming worse.
 
 1000개 이상의 파일 업로드가 필요하고, 빠른 속도를 달성해야 하기 때문에 FAISS 사용 결정. 하지만 실시간 파일 업데이트 부분에서 문제가 있음. 
 
