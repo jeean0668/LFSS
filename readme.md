@@ -4,7 +4,7 @@ If you want to see the detail of this project, please check the following langua
 - [Korean](README.ko.md)
 
 ## How to use?
-![LFSS Demo](introduction.gif)
+<img src="introduction.gif" alt="LFSS Demo" width="1080">
 
 if you can't see the gif, please check the following link.
 [LFSS Demo](https://github.com/jeean0668/LFSS/introduction.gif)
