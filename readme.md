@@ -3,15 +3,15 @@ If you want to see the detail of this project, please check the following langua
 
 - [Korean](README.ko.md)
 
+# LFSS (Local File Semantic Search)
+  
+This project is a document search project that uses a local file vector database. It helps users search for documents stored in the local file system and find similar documents. It operates **entirely in a local environment**.
+
 ## How to use?
 <img src="introduction.gif" alt="LFSS Demo" width="1080">
 
 if you can't see the gif, please check the following link.
-[LFSS Demo](https://github.com/jeean0668/LFSS/introduction.gif)
-
-# LFSS (Local File Semantic Search)
-  
-This project is a document search project that uses a local file vector database. It helps users search for documents stored in the local file system and find similar documents. It operates **entirely in a local environment**.
+[LFSS Demo](https://github.com/jeean0668/LFSS/blob/main/introduction.gif)
 
 ## Target Users 
  - Users **who work in a company** and want to search for documents stored in the local file system. 
