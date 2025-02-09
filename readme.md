@@ -88,4 +88,4 @@ It can be used for free and commercial use. For more details, please refer to th
 - 2025.02.07: **Korean file search performance issues**. Korean file search performance is lower compared to English. It is estimated that data loss during vector compression is large because Korean tokens are larger than alphabets.
 - 2025.02.07: **Windows OS support issues**. Windows OS is not supported. We will support it in the future.
 - 2025.02.07: **LLM response issues**. The LLM response is not good. We will improve it in the future.
-
+- 2025.02.08: **File search performance issues**. 현재 "개못찾네" 라는 키워드를 입력하면, "개" 가 많이 들어간 파일들이 검색되는 문제가 있습니다(ex : 개발지원센터, 팀 소개). 이를 해결하기 위해서는 문장의 의미를 정확하게 담을 수 있는 정교한 Embedding 모델을 사용해야 합니다.

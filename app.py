@@ -8,6 +8,7 @@ from sentence_transformers import SentenceTransformer
 import sys
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from utils.loader.FileLoader import FileLoader
+import numpy as np
 
 # ✅ Load document embedding model
 embedding_model = SentenceTransformer("all-mpnet-base-v2")
@@ -34,7 +35,7 @@ def create_database(target_folder):
             return text
 
         # ✅ Split documents (supports long documents) + save file paths
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=200)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 
         docs = []
         metadata = []  # Save file paths
@@ -90,7 +91,7 @@ def create_database(target_folder):
         st.text_area("Error log", str(e))
         print(f"Error occurred: {e}")
 
-def search_faiss(query, top_k=5):
+def search_faiss(query, top_k=1):
     """Search FAISS and return related documents"""
     index = faiss.read_index("db/faiss_index.idx")
 
@@ -99,8 +100,56 @@ def search_faiss(query, top_k=5):
         metadata = data["metadata"]
         original_texts = data["original_texts"]
 
-    query_vector = embedding_model.encode([query], convert_to_numpy=True)
-    distances, indices = index.search(query_vector, top_k)
+    # LLM을 사용하여 쿼리 텍스트 가공
+    system_prompt = """
+    사용자의 검색어를 분석하여 더 자세하고 구체적인 검색어로 확장해주세요.
+    검색어를 확장할 때는 원래 검색어의 의미를 유지하면서, 관련된 키워드나 동의어를 추가하세요.
+    답변은 확장된 검색어만 제시해주세요.
+    확장된 검색어는 아래 형태로 제시해 주세요.
+    [키워드1, 키워드2, 키워드3]
+    확장된 검색어는 최대 3개까지만 제시해 주세요.
+    """
+    
+    llm_response = ollama.chat(
+        model="gemma2:2b",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"검색어: {query}"}
+        ]
+    )
+    
+    # LLM이 가공한 검색어 사용
+    enhanced_query = llm_response["message"]["content"]
+    print(f"원본 검색어: {query}")
+    print(f"확장된 검색어: {enhanced_query}")
+    # query_vector = embedding_model.encode([query], convert_to_numpy=True)
+    # 문자열에서 대괄호 안의 내용만 추출하고 리스트로 변환
+    import re
+    
+    # 대괄호 안의 내용만 추출
+    match = re.search(r'\[(.*?)\]', enhanced_query)
+    if match:
+        # 대괄호 안의 내용을 쉼표로 분리하고 각 항목의 공백 제거
+        keywords = [keyword.strip() for keyword in match.group(1).split(',')]
+        # 리스트를 문자열로 합치기
+        enhanced_query = ' '.join(keywords)
+    else:
+        # 대괄호 형식이 아닌 경우 원본 쿼리 사용
+        enhanced_query = query
+        
+    # 각 키워드별로 벡터 생성 및 검색 수행
+    all_distances = []
+    all_indices = []
+    
+    for keyword in keywords:
+        query_vector = embedding_model.encode([keyword], convert_to_numpy=True)
+        distances, indices = index.search(query_vector, top_k)
+        all_distances.extend(distances[0])
+        all_indices.extend(indices[0])
+    
+    # 리스트를 numpy 배열로 변환
+    distances = np.array([all_distances])
+    indices = np.array([all_indices])
 
     results = sorted([
         {
